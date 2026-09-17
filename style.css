@@ -1,0 +1,82 @@
+/* The Final Frontier — UI stylesheet */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; overflow:hidden; background:#0b0620;
+  font-family:"Segoe UI", system-ui, sans-serif; color:#e8e4ff;
+  touch-action:none; user-select:none; -webkit-user-select:none; }
+.hidden { display:none !important; }
+#game { position:fixed; inset:0; width:100%; height:100%; display:block; image-rendering:pixelated; }
+
+/* ---------- HUD ---------- */
+#hud { position:fixed; top:0; left:0; right:0; padding:10px 12px; display:flex;
+  align-items:flex-start; justify-content:space-between; pointer-events:none; z-index:5; }
+#bars { display:flex; flex-direction:column; gap:6px; width:min(44vw,260px); }
+.bar { position:relative; height:22px; background:rgba(10,6,32,.72); border:1px solid #4a3f8f;
+  border-radius:6px; overflow:hidden; }
+.fill { height:100%; width:100%; transition:width .18s ease-out; }
+.fill.hp { background:linear-gradient(90deg,#ff4d6d,#ff9a5a); }
+.fill.en { background:linear-gradient(90deg,#38e1ff,#7a5cff); }
+.bar span { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:#fff; text-shadow:0 1px 2px #000; }
+#hud-right { display:flex; gap:8px; align-items:center; }
+#level-badge, #credits { background:rgba(10,6,32,.72); border:1px solid #4a3f8f; border-radius:6px;
+  padding:5px 10px; font-size:13px; font-weight:700; }
+#credits { color:#ffd76a; }
+#quest-tracker { position:fixed; top:64px; left:12px; max-width:70vw; background:rgba(10,6,32,.72);
+  border:1px solid #4a3f8f; border-left:4px solid #ffd76a; border-radius:6px; padding:8px 10px; z-index:5;
+  pointer-events:none; font-size:13px; }
+#quest-tracker #quest-title { display:block; font-weight:800; color:#ffd76a; font-size:12px;
+  text-transform:uppercase; letter-spacing:.06em; }
+
+/* ---------- Touch controls ---------- */
+#touch { position:fixed; inset:0; z-index:6; pointer-events:none; }
+#joystick { position:absolute; left:26px; bottom:30px; width:128px; height:128px; border-radius:50%;
+  background:rgba(120,110,220,.12); border:2px solid rgba(150,140,255,.35); pointer-events:auto; }
+#stick { position:absolute; left:50%; top:50%; width:56px; height:56px; border-radius:50%;
+  background:rgba(150,140,255,.45); border:2px solid rgba(200,195,255,.6);
+  transform:translate(-50%,-50%); }
+#touch-buttons { position:absolute; right:22px; bottom:26px; display:flex; gap:14px; align-items:flex-end;
+  pointer-events:auto; }
+.tbtn { width:74px; height:74px; border-radius:50%; border:2px solid rgba(200,195,255,.55);
+  background:rgba(90,70,200,.35); color:#fff; font-size:30px; pointer-events:auto; }
+.tbtn:active { background:rgba(140,120,255,.55); }
+#btn-fire { border-color:rgba(56,225,255,.7); }
+#btn-talk { border-color:rgba(255,215,106,.8); font-weight:800; }
+
+/* ---------- Dialogue ---------- */
+#dialogue { position:fixed; left:12px; right:12px; bottom:calc(30px + env(safe-area-inset-bottom));
+  background:rgba(12,8,36,.94); border:1px solid #6a5cff; border-radius:12px; padding:14px 16px;
+  z-index:20; max-height:38vh; overflow:hidden; }
+#dlg-name { font-weight:800; color:#ffd76a; font-size:14px; text-transform:uppercase;
+  letter-spacing:.08em; margin-bottom:6px; }
+#dlg-text { font-size:16px; line-height:1.45; }
+#dlg-hint { margin-top:8px; font-size:12px; color:#9d94d8; text-align:right; }
+
+/* ---------- Banner ---------- */
+#banner { position:fixed; top:38%; left:50%; transform:translate(-50%,-50%); z-index:15;
+  background:rgba(12,8,36,.9); border:1px solid #ffd76a; border-radius:10px; padding:14px 22px;
+  font-size:18px; font-weight:700; color:#ffd76a; text-align:center; pointer-events:none;
+  animation:bannerIn .25s ease-out; max-width:86vw; }
+@keyframes bannerIn { from { transform:translate(-50%,-50%) scale(.85); opacity:0; } }
+
+/* ---------- Title / end screens ---------- */
+#title { position:fixed; inset:0; z-index:30; display:flex; align-items:center; justify-content:center; }
+#title-bg { position:absolute; inset:0; background:url('assets/title_vista.png') center/cover no-repeat #0b0620; }
+#title-bg::after { content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(5,2,18,.25), rgba(5,2,18,.78)); }
+#title-inner { position:relative; text-align:center; padding:24px; }
+#title-inner h1 { font-size:clamp(38px,9vw,72px); letter-spacing:.1em; color:#fff;
+  text-shadow:0 0 24px #7a5cff, 0 4px 0 #2a1f6e; line-height:1.05; }
+.subtitle { margin:10px 0 26px; color:#c9c2ff; font-size:clamp(14px,3.6vw,19px); font-style:italic; }
+.menu-btn { display:block; width:min(78vw,340px); margin:10px auto; padding:14px; font-size:17px;
+  font-weight:800; letter-spacing:.04em; color:#fff; background:linear-gradient(180deg,#6a5cff,#4a34c8);
+  border:1px solid #9d94ff; border-radius:12px; cursor:pointer; }
+.menu-btn:active { transform:scale(.97); }
+.menu-btn.ghost { background:rgba(20,14,50,.6); }
+.foot { margin-top:22px; font-size:12px; color:#9d94d8; }
+.end-screen { position:fixed; inset:0; z-index:30; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; background:rgba(5,2,18,.92); text-align:center; padding:24px; }
+.end-screen h2 { font-size:clamp(30px,8vw,54px); letter-spacing:.12em; margin-bottom:12px;
+  text-shadow:0 0 20px #7a5cff; }
+.end-screen p { color:#c9c2ff; margin-bottom:20px; max-width:420px; line-height:1.5; }
+#gameover h2 { color:#ff6b81; text-shadow:0 0 20px #ff2d55; }
+#victory h2 { color:#ffd76a; text-shadow:0 0 20px #ffb400; }
